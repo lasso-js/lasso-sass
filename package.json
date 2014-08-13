@@ -22,11 +22,11 @@
   "dependencies": {
     "node-sass": "^0.9.3",
     "raptor-logging": "^0.2.6-beta",
-    "raptor-util": "^0.2.7-beta",
-    "node-sass": "^0.9.3"
+    "raptor-util": "^0.2.7-beta"
   },
   "devDependencies": {
     "chai": "~1.8.1",
+    "jshint": "^2.5.3",
     "mocha": "~1.15.1"
   },
   "license": "Apache License v2.0",
