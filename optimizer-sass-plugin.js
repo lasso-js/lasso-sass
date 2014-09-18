@@ -1,0 +1,62 @@
+var sass = null;
+var sassPath = null;
+try {
+    sassPath = require.resolve('node-sass');
+} catch(e) {}
+
+if (sassPath) {
+    sass = require(sassPath);
+}
+
+var extend = require('raptor-util/extend');
+
+module.exports = function(optimizer, config) {
+    optimizer.dependencies.registerStyleSheetType(
+        'scss',
+        {
+            properties: {
+                'path': 'string',
+                'paths': 'string'
+            },
+
+            init: function(optimizerContext, callback) {
+                if (!this.path) {
+                    return callback(new Error('"path" is required for a sass dependency'));
+                }
+
+                if (!sass) {
+                    return callback(new Error('Unable to handle Sass dependency for path "' + this.path + '". The "node-sass" module was not found. This module should be installed as a top-level application dependency using "npm install node-sasss --save".'));
+                }
+
+                this.path = this.resolvePath(this.path);
+
+                callback();
+            },
+
+            read: function(optimizerContext, callback) {
+                var path = this.path;
+
+                var renderOptions = extend({}, config);
+
+                renderOptions.file = path;
+
+                renderOptions.success = function(css) {
+                    callback(null, css);
+                };
+
+                renderOptions.error = function(err) {
+                    callback(err);
+                };
+
+                sass.render(renderOptions);
+            },
+
+            getSourceFile: function() {
+                return this.path;
+            },
+
+            getLastModified: function(optimizerContext, callback) {
+                return callback(null, -1);
+            }
+        });
+};
