@@ -1,40 +1,40 @@
 {
-    "name": "raptor-optimizer-sass",
-    "description": "RaptorJS Optimizer plugin to support compilation of sass dependencies",
-    "keywords": [
-        "raptor-optimizer",
-        "raptor-optimizer-plugin",
-        "sass"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/raptorjs3/raptor-optimizer-sass.git"
-    },
-    "scripts": {
-        "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint lib/"
-    },
-    "author": "Patrick Steele-Idem <pnidem@gmail.com>",
-    "contributors": [
-        "Patrick Steele-Idem <pnidem@gmail.com>",
-        "Phillip Gates-Idem <phillip.idem@gmail.com>"
-    ],
-    "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
-    "dependencies": {
-        "node-sass": "^0.9.3",
-        "raptor-logging": "^1.0.0-beta",
-        "raptor-util": "^1.0.0-beta"
-    },
-    "devDependencies": {
-        "chai": "~1.8.1",
-        "jshint": "^2.5.3",
-        "mocha": "~1.15.1"
-    },
-    "license": "Apache License v2.0",
-    "bin": {},
-    "main": "lib/raptor-optimizer-sass-plugin.js",
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
-    },
-    "ebay": {},
-    "version": "1.0.1-beta"
+  "name": "raptor-optimizer-sass",
+  "description": "RaptorJS Optimizer plugin to support compilation of sass dependencies",
+  "keywords": [
+    "raptor-optimizer",
+    "raptor-optimizer-plugin",
+    "sass"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raptorjs3/raptor-optimizer-sass.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint lib/"
+  },
+  "author": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "contributors": [
+    "Patrick Steele-Idem <pnidem@gmail.com>",
+    "Phillip Gates-Idem <phillip.idem@gmail.com>"
+  ],
+  "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "dependencies": {
+    "node-sass": "^0.9.3",
+    "raptor-logging": "^1.0.0-beta",
+    "raptor-util": "^1.0.0-beta"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "jshint": "^2.5.5",
+    "mocha": "~1.15.1"
+  },
+  "license": "Apache License v2.0",
+  "bin": {},
+  "main": "lib/raptor-optimizer-sass-plugin.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "ebay": {},
+  "version": "1.0.1-beta"
 }
