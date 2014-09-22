@@ -21,14 +21,14 @@
     "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
     "dependencies": {
         "node-sass": "^0.9.3",
-        "raptor-logging": "^1.0.0-beta",
-        "raptor-util": "^1.0.0-beta"
+        "raptor-logging": "^1.0.0",
+        "raptor-util": "^1.0.0"
     },
     "devDependencies": {
         "chai": "~1.8.1",
         "jshint": "^2.5.5",
         "mocha": "~1.15.1",
-        "optimizer": "^1.0.11-beta"
+        "optimizer": "^1.0.11"
     },
     "license": "Apache License v2.0",
     "bin": {},
