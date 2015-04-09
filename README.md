@@ -1,7 +1,7 @@
 lasso-sass
 =====================
 
-This Node.js module is a plugin for the [Lasso.js](https://github.com/raptorjs/lasso) that provides support for compiling Sass files with the `.scss` file extension. This plugin is a core plugin for the Lasso.js.
+This Node.js module is a plugin for the [Lasso.js](https://github.com/raptorjs/lasso) that provides support for compiling Sass files with the `.scss` file extension. This plugin is a core plugin for Lasso.js.
 
 # Installation
 
