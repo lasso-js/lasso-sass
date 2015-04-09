@@ -7,9 +7,9 @@ var nodePath = require('path');
 var fs = require('fs');
 
 var sassPlugin = require('../'); // Load this module just to make sure it works
-var optimizer = require('optimizer');
+var lasso = require('lasso');
 
-describe('optimizer-sass' , function() {
+describe('lasso-sass' , function() {
 
     beforeEach(function(done) {
         for (var k in require.cache) {
@@ -21,7 +21,7 @@ describe('optimizer-sass' , function() {
     });
 
     it('should render a simple scss file', function(done) {
-        var pageOptimizer = optimizer.create({
+        var pageOptimizer = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -56,7 +56,7 @@ describe('optimizer-sass' , function() {
 
     it('should render a scss file that uses @import', function(done) {
 
-        var pageOptimizer = optimizer.create({
+        var pageOptimizer = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -91,7 +91,7 @@ describe('optimizer-sass' , function() {
 
     it('should allow for custom include paths when using @import', function(done) {
 
-        var pageOptimizer = optimizer.create({
+        var pageOptimizer = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -128,7 +128,7 @@ describe('optimizer-sass' , function() {
 
     it('should resolve image paths correctly', function(done) {
 
-        var pageOptimizer = optimizer.create({
+        var pageOptimizer = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')

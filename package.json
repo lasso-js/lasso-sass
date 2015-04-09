@@ -1,14 +1,14 @@
 {
-    "name": "optimizer-sass",
+    "name": "lasso-sass",
     "description": "RaptorJS Optimizer plugin to support compilation of sass dependencies",
     "keywords": [
-        "optimizer",
-        "optimizer-plugin",
+        "lasso",
+        "lasso-plugin",
         "sass"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/raptorjs/optimizer-sass.git"
+        "url": "https://github.com/raptorjs/lasso-sass.git"
     },
     "scripts": {
         "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint *.js"
@@ -28,11 +28,11 @@
         "chai": "~1.8.1",
         "jshint": "^2.5.5",
         "mocha": "~1.15.1",
-        "optimizer": "^1.0.11"
+        "lasso": "^1.0.11"
     },
     "license": "Apache License v2.0",
     "bin": {},
-    "main": "./optimizer-sass-plugin.js",
+    "main": "./lasso-sass-plugin.js",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
     },

@@ -10,8 +10,8 @@ if (sassPath) {
 
 var extend = require('raptor-util/extend');
 
-module.exports = function(optimizer, config) {
-    optimizer.dependencies.registerStyleSheetType(
+module.exports = function(lasso, config) {
+    lasso.dependencies.registerStyleSheetType(
         'scss',
         {
             properties: {
@@ -19,7 +19,7 @@ module.exports = function(optimizer, config) {
                 'paths': 'string'
             },
 
-            init: function(optimizerContext, callback) {
+            init: function(lassoContext, callback) {
                 if (!this.path) {
                     return callback(new Error('"path" is required for a sass dependency'));
                 }
@@ -33,7 +33,7 @@ module.exports = function(optimizer, config) {
                 callback();
             },
 
-            read: function(optimizerContext, callback) {
+            read: function(lassoContext, callback) {
                 var path = this.path;
 
                 var renderOptions = extend({}, config);
@@ -55,7 +55,7 @@ module.exports = function(optimizer, config) {
                 return this.path;
             },
 
-            getLastModified: function(optimizerContext, callback) {
+            getLastModified: function(lassoContext, callback) {
                 return callback(null, -1);
             }
         });
