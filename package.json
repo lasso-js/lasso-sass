@@ -1,6 +1,6 @@
 {
     "name": "lasso-sass",
-    "description": "RaptorJS Optimizer plugin to support compilation of sass dependencies",
+    "description": "Lasso.js plugin to support compilation of sass dependencies",
     "keywords": [
         "lasso",
         "lasso-plugin",
