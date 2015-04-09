@@ -21,7 +21,7 @@ describe('lasso-sass' , function() {
     });
 
     it('should render a simple scss file', function(done) {
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -37,7 +37,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/simple.scss')
@@ -56,7 +56,7 @@ describe('lasso-sass' , function() {
 
     it('should render a scss file that uses @import', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -72,7 +72,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/import.scss')
@@ -91,7 +91,7 @@ describe('lasso-sass' , function() {
 
     it('should allow for custom include paths when using @import', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -109,7 +109,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/includes.scss')
@@ -128,7 +128,7 @@ describe('lasso-sass' , function() {
 
     it('should resolve image paths correctly', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -144,7 +144,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/images.scss')
