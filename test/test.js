@@ -43,7 +43,7 @@ describe('lasso-sass' , function() {
                     nodePath.join(__dirname, 'fixtures/simple.scss')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -78,7 +78,7 @@ describe('lasso-sass' , function() {
                     nodePath.join(__dirname, 'fixtures/import.scss')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -115,7 +115,7 @@ describe('lasso-sass' , function() {
                     nodePath.join(__dirname, 'fixtures/includes.scss')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -150,7 +150,7 @@ describe('lasso-sass' , function() {
                     nodePath.join(__dirname, 'fixtures/images.scss')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
