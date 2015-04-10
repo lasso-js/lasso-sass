@@ -37,7 +37,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/simple.scss')
@@ -72,7 +72,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/import.scss')
@@ -109,7 +109,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/includes.scss')
@@ -144,7 +144,7 @@ describe('lasso-sass' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/images.scss')
