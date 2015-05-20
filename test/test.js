@@ -48,7 +48,7 @@ describe('lasso-sass' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal("body {\n  color: #333; }\n");
                 done();
             });
@@ -83,7 +83,7 @@ describe('lasso-sass' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal("body {\n  color: #333; }\n\n.test {\n  color: red; }\n");
                 done();
             });
@@ -120,7 +120,7 @@ describe('lasso-sass' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal(".include {\n  color: blue; }\n\n.foo {\n  color: green; }\n");
                 done();
             });
@@ -155,7 +155,7 @@ describe('lasso-sass' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal(".test {\n  background-image: url(test.png); }\n");
                 done();
             });
