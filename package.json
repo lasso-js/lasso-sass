@@ -20,7 +20,7 @@
     ],
     "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
     "dependencies": {
-        "node-sass": "^0.9.3",
+        "node-sass": ">=0.9.3",
         "raptor-logging": "^1.0.1",
         "raptor-util": "^1.0.0"
     },
