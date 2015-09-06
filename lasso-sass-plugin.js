@@ -40,15 +40,7 @@ module.exports = function(lasso, config) {
 
                 renderOptions.file = path;
 
-                renderOptions.success = function(css) {
-                    callback(null, css);
-                };
-
-                renderOptions.error = function(err) {
-                    callback(err);
-                };
-
-                sass.render(renderOptions);
+                sass.render(renderOptions, callback);
             },
 
             getSourceFile: function() {
