@@ -156,7 +156,7 @@ describe('lasso-sass' , function() {
                 }
 
                 var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".test {\n  background-image: url(test.png); }\n");
+                expect(output).to.equal(".test {\n  background-image: url('test.png'); }\n");
                 done();
             });
     });
