@@ -1,40 +1,40 @@
 {
-    "name": "lasso-sass",
-    "description": "Lasso.js plugin to support compilation of sass dependencies",
-    "keywords": [
-        "lasso",
-        "lasso-plugin",
-        "sass"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/lasso-js/lasso-sass.git"
-    },
-    "scripts": {
-        "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint *.js"
-    },
-    "author": "Patrick Steele-Idem <pnidem@gmail.com>",
-    "contributors": [
-        "Patrick Steele-Idem <pnidem@gmail.com>",
-        "Phillip Gates-Idem <phillip.idem@gmail.com>"
-    ],
-    "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
-    "dependencies": {
-        "node-sass": "^3.3.0",
-        "raptor-logging": "^1.0.1",
-        "raptor-util": "^1.0.0"
-    },
-    "devDependencies": {
-        "chai": "~1.8.1",
-        "jshint": "^2.5.5",
-        "mocha": "~1.15.1",
-        "lasso": "^1.8.4"
-    },
-    "license": "Apache License v2.0",
-    "bin": {},
-    "main": "./lasso-sass-plugin.js",
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
-    },
-    "version": "1.1.9"
+  "name": "lasso-sass",
+  "description": "Lasso.js plugin to support compilation of sass dependencies",
+  "keywords": [
+    "lasso",
+    "lasso-plugin",
+    "sass"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lasso-js/lasso-sass.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint *.js"
+  },
+  "author": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "contributors": [
+    "Patrick Steele-Idem <pnidem@gmail.com>",
+    "Phillip Gates-Idem <phillip.idem@gmail.com>"
+  ],
+  "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "dependencies": {
+    "node-sass": "^4.5.0",
+    "raptor-logging": "^1.0.1",
+    "raptor-util": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jshint": "^2.5.5",
+    "lasso": "^1.8.4",
+    "mocha": "^3.2.0"
+  },
+  "license": "Apache License v2.0",
+  "bin": {},
+  "main": "./lasso-sass-plugin.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "version": "1.1.9"
 }

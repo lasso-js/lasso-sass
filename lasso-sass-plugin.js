@@ -8,26 +8,34 @@ if (sassPath) {
     sass = require(sassPath);
 }
 
+var nodePath = require('path');
 var extend = require('raptor-util/extend');
 
 module.exports = function(lasso, config) {
 
     var sassHandler = {
         properties: {
-            'path': 'string',
-            'paths': 'string'
+            path: 'string',
+            paths: 'string',
+            virtualPath: 'string',
+            code: 'string',
+            external: 'boolean'
         },
 
         init: function(lassoContext, callback) {
-            if (!this.path) {
-                return callback(new Error('"path" is required for a sass dependency'));
-            }
-
             if (!sass) {
                 return callback(new Error('Unable to handle Sass dependency for path "' + this.path + '". The "node-sass" module was not found. This module should be installed as a top-level application dependency using "npm install node-sasss --save".'));
             }
 
-            this.path = this.resolvePath(this.path);
+            var path = this.path;
+
+            if (path || this.code) {
+                if (path) {
+                    this.path = this.resolvePath(path);
+                }
+            } else {
+                return callback(new Error('"path" or "code" is required'));
+            }
 
             callback();
         },
@@ -37,7 +45,13 @@ module.exports = function(lasso, config) {
 
             var renderOptions = extend({}, config);
 
-            renderOptions.file = path;
+            if (this.code) {
+                renderOptions.data = this.code;
+            } else if (path) {
+                renderOptions.file = path;
+            } else {
+                return callback(new Error('Invalid sass dependency. No path or code'));
+            }
 
             sass.render(renderOptions, function(error, result) {
                 if (error) {
@@ -46,14 +60,24 @@ module.exports = function(lasso, config) {
                     callback(null, result.css);
                 }
             });
+
         },
 
-        getSourceFile: function() {
-            return this.path;
+        getDir: function() {
+            if (this.dir) {
+                return this.dir;
+            }
+
+            var path = this.path || this.virtualPath;
+            return path ? nodePath.dirname(path) : undefined;
         },
 
         getLastModified: function(lassoContext, callback) {
             return callback(null, -1);
+        },
+
+        calculateKey: function() {
+            return 'less:' + (this.code || this.virtualPath || this.path);
         }
     };
 

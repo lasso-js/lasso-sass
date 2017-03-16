@@ -1,164 +1,106 @@
 'use strict';
-var chai = require('chai');
-chai.Assertion.includeStack = true;
-require('chai').should();
-var expect = require('chai').expect;
 var nodePath = require('path');
+require('chai').config.includeStack = true;
+
+
+var rmdirRecursive = require('./util').rmdirRecursive;
+var buildDir = nodePath.join(__dirname, 'build');
+
+var lasso = require('lasso');
+var lassoSassPlugin = require('../');
 var fs = require('fs');
 
-var sassPlugin = require('../'); // Load this module just to make sure it works
-var lasso = require('lasso');
+describe('lasso-sass/plugin' , function() {
+    require('./autotest').scanDir(
+        nodePath.join(__dirname, 'autotests-plugin'),
+        function (dir, helpers, done) {
+            var main;
+            var testFile = nodePath.join(dir, 'test.js');
+            var testName = nodePath.basename(dir);
+            var pageName = testName;
 
-describe('lasso-sass' , function() {
-
-    beforeEach(function(done) {
-        for (var k in require.cache) {
-            if (require.cache.hasOwnProperty(k)) {
-                delete require.cache[k];
+            if (fs.existsSync(testFile)) {
+                main = require(testFile);
+            } else {
+                main = {};
             }
-        }
-        done();
-    });
 
-    it('should render a simple scss file', function(done) {
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: sassPlugin,
-                        config: {
-
+            var lassoConfig = main.getLassoConfig && main.getLassoConfig(lassoSassPlugin);
+            if (!lassoConfig) {
+                lassoConfig = {
+                    fingerprintsEnabled: true,
+                    urlPrefix: '/static',
+                    plugins: [
+                        {
+                            plugin: lassoSassPlugin,
+                            config: {}
                         }
-                    }
-                ]
-            });
+                    ]
+                };
+            }
 
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/simple.scss')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
+            if (!lassoConfig.outputDir) {
+                lassoConfig.outputDir = nodePath.join(buildDir, pageName);
+            }
+
+            rmdirRecursive(lassoConfig.outputDir);
+
+            var myLasso = lasso.create(lassoConfig, dir);
+
+            var inputs;
+
+            let lassoOptions = (main.getLassoOptions && main.getLassoOptions(dir)) || {};
+
+
+            let check = main.check;
+
+            inputs = [
+                {
+                    lassoOptions,
+                    check
                 }
+            ];
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal("body {\n  color: #333; }\n");
-                done();
-            });
-    });
+            var checkError = main.checkError;
 
-    it('should render a scss file that uses @import', function(done) {
+            if (!lassoOptions.pageName) {
+                lassoOptions.pageName = pageName;
+            }
 
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: sassPlugin,
-                        config: {
+            if (!lassoOptions.from) {
+                lassoOptions.from = dir;
+            }
 
+            myLasso.lassoPage(lassoOptions)
+                .then((lassoPageResult) => {
+                    if (checkError) {
+                        return done('Error expected');
+                    }
+
+                    if (main.check) {
+                        main.check(lassoPageResult, helpers);
+                    } else {
+                        var cssFile = lassoPageResult.getCSSFiles()[0];
+                        var css;
+                        if (cssFile) {
+                            css = fs.readFileSync(cssFile, { encoding: 'utf8' });
+                        } else {
+                            css = '';
                         }
+
+                        helpers.compare(css, '.css');
                     }
-                ]
-            });
 
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/import.scss')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal("body {\n  color: #333; }\n\n.test {\n  color: red; }\n");
-                done();
-            });
-    });
-
-    it('should allow for custom include paths when using @import', function(done) {
-
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: sassPlugin,
-                        config: {
-                            includePaths: [
-                                nodePath.join(__dirname, 'fixtures/includes')
-                            ]
-                        }
+                    lasso.flushAllCaches(done);
+                })
+                .catch((err) => {
+                    if (checkError) {
+                        checkError(err);
+                        done();
+                    } else {
+                        throw err;
                     }
-                ]
-            });
-
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/includes.scss')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".include {\n  color: blue; }\n\n.foo {\n  color: green; }\n");
-                done();
-            });
-    });
-
-    it('should resolve image paths correctly', function(done) {
-
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: sassPlugin,
-                        config: {
-
-                        }
-                    }
-                ]
-            });
-
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/images.scss')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".test {\n  background-image: url(test.png); }\n");
-                done();
-            });
-    });
-
+                })
+                .catch(done);
+        });
 });

@@ -1,0 +1,10 @@
+{
+    "dependencies": [
+        {
+            "type": "sass",
+            "code": "$primary-color: #333;\nbody { color: $primary-color; }",
+            "virtualPath": "./simple.scss",
+            "path": "./index.marko"
+        }
+    ]
+}
