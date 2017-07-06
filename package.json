@@ -27,7 +27,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "jshint": "^2.5.5",
-    "lasso": "^1.8.4",
+    "lasso": "^2.11.12",
     "mocha": "^3.2.0"
   },
   "license": "Apache License v2.0",
