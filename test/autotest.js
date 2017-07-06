@@ -11,7 +11,7 @@ var enabledTests = null;
 if (enabledTestNames && enabledTestNames.length > 1) {
     enabledTests = {};
     enabledTest = null;
-    enabledTestNames.forEach((testName) => {
+    enabledTestNames.forEach(function (testName) {
         enabledTests[testName] = true;
     });
 }
@@ -51,7 +51,7 @@ function autoTest(name, dir, run, options, done) {
     options = options || {};
 
     var helpers = {
-        compare(actual, suffix) {
+        compare: function (actual, suffix) {
             compareHelper(dir, actual, suffix);
         }
     };
@@ -79,7 +79,7 @@ exports.scanDir = function(autoTestDir, run, options) {
 
                 var dir = path.join(autoTestDir, name);
 
-                itFunc(`[${name}] `, function(done) {
+                itFunc('[' + name + '] ', function(done) {
                     autoTest(name, dir, run, options, done);
                 });
 
