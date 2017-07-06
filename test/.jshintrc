@@ -15,7 +15,7 @@
         "runs"
     ],
     "node" : true,
-    "esnext": true,
+    "esnext": false,
     "browser" : true,
     "boss" : false,
     "curly": false,

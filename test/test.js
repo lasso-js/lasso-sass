@@ -46,18 +46,15 @@ describe('lasso-sass/plugin' , function() {
             rmdirRecursive(lassoConfig.outputDir);
 
             var myLasso = lasso.create(lassoConfig, dir);
-
             var inputs;
 
-            let lassoOptions = (main.getLassoOptions && main.getLassoOptions(dir)) || {};
-
-
-            let check = main.check;
+            var lassoOptions = (main.getLassoOptions && main.getLassoOptions(dir)) || {};
+            var check = main.check;
 
             inputs = [
                 {
-                    lassoOptions,
-                    check
+                    lassoOptions: lassoOptions,
+                    check: check
                 }
             ];
 
@@ -72,7 +69,7 @@ describe('lasso-sass/plugin' , function() {
             }
 
             myLasso.lassoPage(lassoOptions)
-                .then((lassoPageResult) => {
+                .then(function (lassoPageResult) {
                     if (checkError) {
                         return done('Error expected');
                     }
@@ -93,7 +90,7 @@ describe('lasso-sass/plugin' , function() {
 
                     lasso.flushAllCaches(done);
                 })
-                .catch((err) => {
+                .catch(function (err) {
                     if (checkError) {
                         checkError(err);
                         done();
