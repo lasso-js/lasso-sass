@@ -24,7 +24,10 @@ module.exports = function(lasso, config) {
 
         init: function(lassoContext, callback) {
             if (!sass) {
-                return callback(new Error('Unable to handle Sass dependency for path "' + this.path + '". The "node-sass" module was not found. This module should be installed as a top-level application dependency using "npm install node-sasss --save".'));
+                var missingSassError = new Error('Unable to handle Sass dependency for path "' + this.path + '". The "node-sass" module was not found. This module should be installed as a top-level application dependency using "npm install node-sasss --save".');
+
+                if (callback) return callback(missingSassError);
+                throw missingSassError;
             }
 
             var path = this.path;
@@ -34,10 +37,12 @@ module.exports = function(lasso, config) {
                     this.path = this.resolvePath(path);
                 }
             } else {
-                return callback(new Error('"path" or "code" is required'));
+                var pathError = new Error('"path" or "code" is required');
+                if (callback) return callback(pathError);
+                throw pathError;
             }
 
-            callback();
+            if (callback) callback();
         },
 
         read: function(lassoContext, callback) {
@@ -60,7 +65,6 @@ module.exports = function(lasso, config) {
                     callback(null, result.css);
                 }
             });
-
         },
 
         getDir: function() {
@@ -73,7 +77,7 @@ module.exports = function(lasso, config) {
         },
 
         getLastModified: function(lassoContext, callback) {
-            return callback(null, -1);
+            return callback ? callback(null, -1) : -1;
         },
 
         calculateKey: function() {
