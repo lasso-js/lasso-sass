@@ -91,7 +91,8 @@ describe('lasso-sass/plugin' , function() {
                         helpers.compare(css, '.css');
                     }
 
-                    lasso.flushAllCaches(done);
+                    var flushResult = lasso.flushAllCaches(done);
+                    if (flushResult) flushResult.then(done);
                 })
                 .catch((err) => {
                     if (checkError) {
