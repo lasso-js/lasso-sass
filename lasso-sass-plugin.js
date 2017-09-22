@@ -1,3 +1,5 @@
+'use strict';
+
 var sass = null;
 var sassPath = null;
 try {
@@ -46,24 +48,30 @@ module.exports = function(lasso, config) {
         },
 
         read: function(lassoContext, callback) {
-            var path = this.path;
+            return new Promise((resolve, reject) => {
+                callback = callback || function (err, res) {
+                    return err ? reject(err) : resolve(res);
+                };
 
-            var renderOptions = extend({}, config);
+                var path = this.path;
 
-            if (this.code) {
-                renderOptions.data = this.code;
-            } else if (path) {
-                renderOptions.file = path;
-            } else {
-                return callback(new Error('Invalid sass dependency. No path or code'));
-            }
+                var renderOptions = extend({}, config);
 
-            sass.render(renderOptions, function(error, result) {
-                if (error) {
-                    callback(error);
+                if (this.code) {
+                    renderOptions.data = this.code;
+                } else if (path) {
+                    renderOptions.file = path;
                 } else {
-                    callback(null, result.css);
+                    return callback(new Error('Invalid sass dependency. No path or code'));
                 }
+
+                sass.render(renderOptions, function(error, result) {
+                    if (error) {
+                        callback(error);
+                    } else {
+                        callback(null, result.css);
+                    }
+                });
             });
         },
 
