@@ -20,9 +20,9 @@
   ],
   "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
   "dependencies": {
-    "node-sass": "^4.5.0",
     "raptor-logging": "^1.0.1",
-    "raptor-util": "^1.0.0"
+    "raptor-util": "^1.0.0",
+    "sass": "^1.49.9"
   },
   "devDependencies": {
     "chai": "^3.5.0",
