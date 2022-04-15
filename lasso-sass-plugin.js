@@ -3,7 +3,7 @@
 var sass = null;
 var sassPath = null;
 try {
-    sassPath = require.resolve('node-sass');
+    sassPath = require.resolve('sass');
 } catch(e) {}
 
 if (sassPath) {

@@ -34,6 +34,7 @@ function compareHelper(dir, actual, suffix) {
 
     try {
         expectedString = fs.readFileSync(expectedPath, { encoding: 'utf8' });
+        expectedString = expectedString.replace(/(\n|\r)$/, '')
     } catch(e) {
         expectedString = isObject ? '"TBD"' : 'TBD';
         fs.writeFileSync(expectedPath, expectedString, {encoding: 'utf8'});
